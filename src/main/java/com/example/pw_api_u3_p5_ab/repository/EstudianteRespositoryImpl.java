@@ -18,6 +18,8 @@ public class EstudianteRespositoryImpl implements IEstudianteRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+
+
     @Override
     public void insertar(Estudiante estudiante) {
         // TODO Auto-generated method stub
@@ -52,6 +54,8 @@ public class EstudianteRespositoryImpl implements IEstudianteRepository {
         // TODO Auto-generated method stub
         this.entityManager.remove(this.seleccionar(id));
     }
+
+
 
     
 }

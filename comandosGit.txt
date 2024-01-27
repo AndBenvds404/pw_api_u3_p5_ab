@@ -1,0 +1,5 @@
+git config --list
+git config --global --unset-all user.name
+git config --global --unset-all user.email
+git config --global user.name "AndBenvds404"
+git config --global user.email andres_benavides17@hotmail.com
