@@ -2,8 +2,6 @@ package com.example.pw_api_u3_p5_ab.repository.modelo;
 
 import java.time.LocalDateTime;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
