@@ -1,5 +1,7 @@
 package com.example.pw_api_u3_p5_ab.repository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.pw_api_u3_p5_ab.repository.modelo.Estudiante;
@@ -53,6 +55,21 @@ public class EstudianteRespositoryImpl implements IEstudianteRepository {
     public void eliminar(Integer id) {
         // TODO Auto-generated method stub
         this.entityManager.remove(this.seleccionar(id));
+    }
+
+
+    
+    @Override
+    public List<Estudiante> buscarTodos(String genero) {
+        // TODO Auto-generated method stub
+
+        var query = this.entityManager.createQuery("SELECT e Estudiante FROM Estudiante e WHERE e.genero =: valorGenero", Estudiante.class);
+        query.setParameter("valorGenero", genero);
+        
+        
+        return query.getResultList();
+
+        
     }
 
 

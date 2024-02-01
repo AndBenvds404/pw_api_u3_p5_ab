@@ -1,5 +1,9 @@
 package com.example.pw_api_u3_p5_ab.repository;
 
+
+
+import java.util.List;
+
 import com.example.pw_api_u3_p5_ab.repository.modelo.Estudiante;
 
 public interface IEstudianteRepository {
@@ -8,6 +12,8 @@ public interface IEstudianteRepository {
     public void actualizarParcial(String apellido, String nombre, Integer Id);
     public Estudiante seleccionar(Integer id);
     public void eliminar(Integer id);
+  
+    public List<Estudiante> buscarTodos(String genero);
 
     
 
