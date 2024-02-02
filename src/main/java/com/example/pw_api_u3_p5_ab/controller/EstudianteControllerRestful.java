@@ -34,43 +34,44 @@ public class EstudianteControllerRestFul {
 
     //Metodosd = capacidades
 
-    @GetMapping(path="/consultar/{id}")  
+    @GetMapping(path="/{id}")  
     public Estudiante buscar(@PathVariable Integer id){
         return estudianteService.buscar(id);
     }
  
    // http://localhost:8080/API/v1.0/Matricula/estudiantes/buscar
 
-    @PostMapping(path="/guardar")
+    @PostMapping
     public void guardar(@RequestBody Estudiante estudiante){
         this.estudianteService.guardar(estudiante);
     }
 
-    @PutMapping(path="/actualizar")
-    public void actualizar(@RequestBody Estudiante estudiante){
+    @PutMapping(path = "/{id}")
+    public void actualizar(@RequestBody Estudiante estudiante, @PathVariable Integer id){
+        //estudiante.setId(id);
         this.estudianteService.actualizar(estudiante);
     }
 
 
-    @PatchMapping(path = "/actualizarParcial")
-    public void actualizarParcial (@RequestBody Estudiante estudiante){
+    @PatchMapping(path = "/{id}")
+    public void actualizarParcial (@RequestBody Estudiante estudiante, @PathVariable Integer id){
 
-        this.estudianteService.actualizarParcial(estudiante.getApellido(), estudiante.getNombre(), estudiante.getId());
+        this.estudianteService.actualizarParcial(estudiante.getApellido(), estudiante.getNombre(), id);
 
     }
 
 
-    @DeleteMapping(path = "/borrar")
-    public void borrar (){
-        this.estudianteService.borrar(1);
+    @DeleteMapping(path = "/{id}")
+    public void borrar (@PathVariable Integer id){
+        this.estudianteService.borrar(id);
     }
 
 
     //filtrar un conjunto/lista los datos
-    @GetMapping(path = "consultarTodos")
+    @GetMapping
     // http://localhost:8080/API/v1.0/Matricula/estudiantes/consultarTodos?genero=f&edad=15
-    public List<Estudiante> consultarTodos(@RequestParam String genero, @RequestParam Integer edad ){
-        System.out.println(edad);
+    public List<Estudiante> consultarTodos(@RequestParam (required = false, defaultValue = "m") String genero ){
+        
         return this.estudianteService.buscarTodos(genero);
     }
  
