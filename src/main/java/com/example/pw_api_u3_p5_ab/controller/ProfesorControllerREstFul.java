@@ -26,27 +26,29 @@ public class ProfesorControllerREstFul {
 
 	// http://localhost:8080/API/v1.0/Matricula/profesores
 
-	@PostMapping(path = "/guardar")
+	@PostMapping
 	public void guardar(@RequestBody Profesor profesor) {
 		this.profesorService.guardar(profesor);
 	}
 
-	@GetMapping(path = "/buscar/{id}")
+	@GetMapping(path = "/{id}")
 	public Profesor buscar(@PathVariable Integer id) {
 		return this.profesorService.buscar(id);
 	}
 
-	@PutMapping(path = "/actualizar")
-	public void actualizar(@RequestBody Profesor profesor) {
+	@PutMapping(path = "/{id}")
+	public void actualizar(@RequestBody Profesor profesor, @PathVariable Integer id) {
+		profesor.setId(id);
 		this.profesorService.actualizar(profesor);
 	}
 
-	@PatchMapping(path = "/actualizarParcial")
-	public void actualizarDatosPersonales(@RequestBody Profesor profesor) {
+	@PatchMapping(path = "/{id}")
+	public void actualizarDatosPersonales(@RequestBody Profesor profesor, @PathVariable Integer id) {
+		profesor.setId(id);
 		this.profesorService.actualizarDatosPersonales(profesor.getId(), profesor.getMateria(), profesor.getSalario());
 	}
 
-	@DeleteMapping(path = "/borrar/{id}")
+	@DeleteMapping(path = "/{id}")
 	public void borrar(@PathVariable Integer id) {
 		this.profesorService.borrar(id);
 	}
