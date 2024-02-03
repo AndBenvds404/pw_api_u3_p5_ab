@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 //Path clase = Servicio
 @RequestMapping(path="/estudiantes")
-public class EstudianteControllerRestFul {
+public class EstudianteControllerRestful {
  
     @Autowired
     private IEstudianteService estudianteService;

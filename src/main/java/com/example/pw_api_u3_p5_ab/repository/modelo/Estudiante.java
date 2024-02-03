@@ -14,6 +14,8 @@ import jakarta.persistence.Table;
 @Table(name = "estudiante")
 
 public class Estudiante {
+    
+    //test
 
     @Id
     @SequenceGenerator(name = "seq_estudiante", sequenceName = "seq_estudiante", allocationSize = 1)
