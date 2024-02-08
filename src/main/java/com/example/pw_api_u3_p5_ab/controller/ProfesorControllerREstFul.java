@@ -3,6 +3,8 @@ package com.example.pw_api_u3_p5_ab.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,23 +30,24 @@ public class ProfesorControllerREstFul {
 
 	// http://localhost:8080/API/v1.0/Matricula/profesores
 
-	@PostMapping
+	@PostMapping (consumes = MediaType.APPLICATION_XML_VALUE)
 	public void guardar(@RequestBody Profesor profesor) {
 		this.profesorService.guardar(profesor);
 	}
 
-	@GetMapping(path = "/{id}")
-	public Profesor buscar(@PathVariable Integer id) {
-		return this.profesorService.buscar(id);
+	@GetMapping(path = "/{id}", produces =  MediaType.APPLICATION_XML_VALUE)
+	public ResponseEntity<Profesor>  buscar(@PathVariable Integer id) {
+		Profesor profesor = this.profesorService.buscar(id);
+		return ResponseEntity.status(HttpStatus.OK).body(profesor);
 	}
 
-	@PutMapping(path = "/{id}")
+	@PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void actualizar(@RequestBody Profesor profesor, @PathVariable Integer id) {
 		profesor.setId(id);
 		this.profesorService.actualizar(profesor);
 	}
 
-	@PatchMapping(path = "/{id}")
+	@PatchMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void actualizarDatosPersonales(@RequestBody Profesor profesor, @PathVariable Integer id) {
 		profesor.setId(id);
 		this.profesorService.actualizarDatosPersonales(profesor.getId(), profesor.getMateria(), profesor.getSalario());
@@ -55,9 +58,10 @@ public class ProfesorControllerREstFul {
 		this.profesorService.borrar(id);
 	}
 
-	@GetMapping(path = "/consultarMateria")
-	public List<Profesor> buscarPorMateria(@RequestParam String materia){
-		return this.profesorService.consultarMateria(materia);
+	@GetMapping(path = "/consultarMateria", produces =  MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Profesor>>  buscarPorMateria(@RequestParam String materia){
+		 List<Profesor> lista = this.profesorService.consultarMateria(materia);
+		 return ResponseEntity.status(HttpStatus.OK).body(lista);
 	}
 
     
