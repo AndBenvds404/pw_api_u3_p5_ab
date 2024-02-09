@@ -4,7 +4,10 @@ import org.springframework.web.bind.annotation.RestController;
  
 import com.example.pw_api_u3_p5_ab.repository.modelo.Estudiante;
 import com.example.pw_api_u3_p5_ab.service.IEstudianteService;
- 
+import com.example.pw_api_u3_p5_ab.service.IMateriaService;
+import com.example.pw_api_u3_p5_ab.service.to.EstudianteTo;
+import com.example.pw_api_u3_p5_ab.service.to.MateriaTo;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -33,6 +36,9 @@ public class EstudianteControllerRestFul {
  
     @Autowired
     private IEstudianteService estudianteService;
+
+    @Autowired
+    private IMateriaService materiaService;
  
 
 
@@ -81,6 +87,23 @@ public class EstudianteControllerRestFul {
         cabeceras.add("Mensaje_respuesta_242","lista consultada positivamente" );
 
         return new ResponseEntity<>(lista,cabeceras,HttpStatus.OK);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    // http://localhost:8080/API/v1.0/Matricula/estudiantes/consultarTodos?genero=f&edad=15
+    public ResponseEntity< List<EstudianteTo>> consultarTodosHateoas(){
+        List<EstudianteTo> lista = this.estudianteService.buscarTodosTo();
+        
+
+        return ResponseEntity.status(HttpStatus.OK).body(lista);
+    }
+
+    @GetMapping(path = "/{id}/materias", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<  List<MateriaTo>> consultarMateriaPorId(@PathVariable Integer id){
+
+        var lista = this.materiaService.buscarPorIdEstudiante(id);
+        System.out.println(lista);
+        return ResponseEntity.status(HttpStatus.OK).body(lista) ;
     }
  
    
