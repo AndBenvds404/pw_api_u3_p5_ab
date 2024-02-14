@@ -33,7 +33,63 @@ public class Estudiante {
 
     @OneToMany(mappedBy = "estudiante") // un estudiante tiene muchas materias
 	private List<Materia> materias;
+
+	@Column(name = "estu_direccion")
+	private String direccion;
+
+	@Column(name = "estu_correo_electronico")
+	private String correoElectronico;
+
+	@Column(name = "estu_edad")
+	private Integer edad;
+
+	@Column(name = "estu_telefono")
+	private String telefono;
+
+	@Column(name = "carrera")
+	private String carrera;
 	
+	
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getCorreoElectronico() {
+		return correoElectronico;
+	}
+
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
+	}
+
+	public Integer getEdad() {
+		return edad;
+	}
+
+	public void setEdad(Integer edad) {
+		this.edad = edad;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
+	}
+
 	// GET Y SET
 	public Integer getId() {
 		return id;

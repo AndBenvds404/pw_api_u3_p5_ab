@@ -3,6 +3,7 @@ package com.example.pw_api_u3_p5_ab.service;
 import java.util.List;
 
 import com.example.pw_api_u3_p5_ab.repository.modelo.Estudiante;
+import com.example.pw_api_u3_p5_ab.service.to.EstudianteLigeroTo;
 import com.example.pw_api_u3_p5_ab.service.to.EstudianteTo;
 
 public interface IEstudianteService {
@@ -15,5 +16,8 @@ public interface IEstudianteService {
     public List<Estudiante> buscarTodos(String genero);
 
     public List<EstudianteTo> buscarTodosTo();
+
+    public List<EstudianteLigeroTo> buscarTodosLigeroTo();
+	public EstudianteLigeroTo buscarLigeroTO(Integer id);
 
 }

@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.pw_api_u3_p5_ab.repository.modelo.Estudiante;
 import com.example.pw_api_u3_p5_ab.service.IEstudianteService;
 import com.example.pw_api_u3_p5_ab.service.IMateriaService;
+import com.example.pw_api_u3_p5_ab.service.to.EstudianteLigeroTo;
 import com.example.pw_api_u3_p5_ab.service.to.EstudianteTo;
 import com.example.pw_api_u3_p5_ab.service.to.MateriaTo;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import org.springframework.http.HttpHeaders;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  
 //API: por el proyecto
 
@@ -105,6 +109,26 @@ public class EstudianteControllerRestFul {
         System.out.println(lista);
         return ResponseEntity.status(HttpStatus.OK).body(lista) ;
     }
+
+
+    @GetMapping(path = "/ligero/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<EstudianteLigeroTo> buscarLigeroTO(@PathVariable Integer id) {
+		EstudianteLigeroTo estuTo = this.estudianteService.buscarLigeroTO(id);
+		Link link = linkTo(methodOn(EstudianteControllerRestFul.class).buscarLigeroTO(estuTo.getId()))
+				.withSelfRel();
+		estuTo.add(link);
+		return ResponseEntity.status(HttpStatus.OK).body(estuTo);
+	}
+
+    @GetMapping(path = "/ligero", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<EstudianteLigeroTo>> consultarTodosHateoasLigero() {
+		List<EstudianteLigeroTo> ls = this.estudianteService.buscarTodosLigeroTo();
+		for (EstudianteLigeroTo est : ls) {
+			Link link = linkTo(methodOn(EstudianteControllerRestFul.class).consultarMateriaPorId(est.getId())).withSelfRel();
+			est.add(link);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(ls);
+	}
  
    
 }
