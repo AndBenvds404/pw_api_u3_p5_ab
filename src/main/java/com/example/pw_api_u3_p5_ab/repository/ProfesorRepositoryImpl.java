@@ -2,14 +2,15 @@ package com.example.pw_api_u3_p5_ab.repository;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.pw_api_u3_p5_ab.repository.model.Profesor;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.transaction.Transactional;
+
 
 @Repository
 @Transactional
@@ -34,7 +35,7 @@ public class ProfesorRepositoryImpl implements IProfesorRepository{
     public void actualizarParcial(String nombre, String apellido, Integer id) {
         // TODO Auto-generated method stub
         // SQL: UPDATE estudiante e set e.estu_nombre=:valor1, e.estu_apellido=:valor2 WHERE e.estu_id=:valor3
-        Query query = this.entityManager.createQuery("UPDATE Profesor e SET e.nombre =: valor1, e.apellido =: valor2 WHERE e.id =: valor3");
+        var query = this.entityManager.createQuery("UPDATE Profesor e SET e.nombre =: valor1, e.apellido =: valor2 WHERE e.id =: valor3");
         query.setParameter("valor1", nombre);
         query.setParameter("valor2", apellido);
         query.setParameter("valor3", id);
