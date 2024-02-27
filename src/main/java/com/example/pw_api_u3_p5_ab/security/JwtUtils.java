@@ -11,13 +11,14 @@ import io.jsonwebtoken.Jwts;
 @Component
 public class JwtUtils {
 
+    //semilla server security
     @Value("${app.jwt.secret}")
     private String jwtSecret;
 
         Logger LOG = LoggerFactory.getLogger(JwtUtils.class);
     
         public boolean validateJwtToken (String authToken){
-            LOG.info("jwtUtilssssssssss");
+            LOG.info("jwtUtils");
             LOG.info(authToken);
             LOG.info(jwtSecret);
             try{          
